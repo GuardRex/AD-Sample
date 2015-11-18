@@ -1,0 +1,37 @@
+﻿@using System.Security.Principal
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <meta name="description" content="@ViewBag.Description">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="keywords" content="@ViewBag.Keywords">
+</head>
+<body>
+    <header style="text-align:center;max-width:1240px;margin:0 auto">
+        <h1 style="color:white;cursor:pointer">
+            <a href="/">Website Administration</a>
+        </h1>
+        <div style="border-top:1px solid #fff;">
+            <nav id="navbar" style="padding:27px 0 22px;margin:0;background:none;border:none">
+                <ul id="nav" class="nav" style="float:none;display:inline-block;position:relative;padding:0;margin:0;background:none;list-style:none">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a href="/account/logout">log out</a></li>
+                    } else {
+                        <li><a href="/account/login">log in</a></li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div style="margin:0 auto;max-width:1240px;background-color:#fff">
+        <div class="container">
+            @RenderBody()
+        </div>
+    </div>
+    <footer style="background:#faf6f0;border-top:1px solid #f2ece0">
+    </footer>
+</body>
+</html>

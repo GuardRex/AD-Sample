@@ -1,0 +1,50 @@
+@using System.Security.Principal
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Admin";
+    ViewBag.Description = "Administrator functions";
+    ViewBag.ItemPropName = "Admin";
+    ViewBag.ItemPropUrl = "//www.XXXXX.com/" + Context.Request.Path;
+    ViewBag.Keywords = "";
+}<div class="row" style="min-height:500px">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h1>Website Administration</h1>
+        <ul>
+            <li><a href="/Home/UserAuthorized">User Authorized Page</a></li>
+            <li><a href="/Home/AdministratorAuthorized">Administrator Authorized Page</a></li>
+        </ul>
+        <h3>User Claims</h3>
+        <table style="width:1140px">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var claim in User.Claims)
+                {
+                    @if (claim.Type != "nonce" && claim.Type != "c_hash")
+                    {
+                        <tr>
+                            <td>@claim.Type</td>
+                            <td>@claim.Value</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <h3>User Identities</h3>
+        <ul>
+            @foreach (var id in User.Identities)
+            {
+                <li>@id.Name</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <h3>Please log in to proceed</h3>
+    }
+</div>
